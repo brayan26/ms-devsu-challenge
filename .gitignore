@@ -17,6 +17,7 @@ ms-accounts-neg/
 .sts4-cache
 
 ### IntelliJ IDEA ###
+.idea
 ms-client-neg/.idea
 ms-accounts-neg/.idea
 *.iws

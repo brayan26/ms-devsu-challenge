@@ -13,7 +13,7 @@ public class ClientEvent extends DomainEvent {
     private final ClientPayload payload;
 
     public ClientEvent(String eventId, ClientPayload payload, EventType eventType, Date occurredOn) {
-        super(eventId, EVENT_NAME, EventType.CREATED, occurredOn);
+        super(eventId, EVENT_NAME, eventType, occurredOn);
         this.payload = payload;
     }
 }

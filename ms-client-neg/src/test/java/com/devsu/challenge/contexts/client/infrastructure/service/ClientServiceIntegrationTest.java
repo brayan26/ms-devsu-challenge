@@ -79,6 +79,13 @@ public class ClientServiceIntegrationTest {
       Client response = service.updateUser(client, id);
       log.info("<Updated> {}", GenericMapper.serialize(response));
       assertEquals("John Doe Updated",response.getName());
+
+      verify(kafkaEventHandlerService, times(1))
+            .publisher(argThat(event ->
+                  event instanceof ClientEvent ce &&
+                        ce.getEventType() == EventType.UPDATED
+            ));
+
    }
 
    @Test
@@ -102,5 +109,12 @@ public class ClientServiceIntegrationTest {
       } catch (Exception ignored) {}
 
       assertNull(deletedClient, "El cliente aún existe, debería haber sido eliminado");
+
+      // Verificar que se publicó un evento de tipo DELETED
+      verify(kafkaEventHandlerService, times(1))
+            .publisher(argThat(event ->
+                  event instanceof ClientEvent ce &&
+                        ce.getEventType() == EventType.DELETED
+            ));
    }
 }

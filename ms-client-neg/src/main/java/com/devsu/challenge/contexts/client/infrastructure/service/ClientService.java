@@ -50,7 +50,7 @@ public class ClientService {
 
       ClientPayload payload = ClientMapper.toPayloadEvent(updatedClient);
       ClientEvent clientEvent = new ClientEvent(UUID.randomUUID().toString(), payload, EventType.UPDATED, new Date());
-      this.eventBus.publisher(updatedClient.pullDomainEvent());
+      this.eventBus.publisher(clientEvent);
 
       return updatedClient;
    }
