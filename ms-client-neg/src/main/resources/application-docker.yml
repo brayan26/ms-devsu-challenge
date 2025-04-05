@@ -1,0 +1,35 @@
+#Logger
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+  datasource:
+    url: jdbc:mysql://mysql:3306/test
+    username: root
+    password: 1122q!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+kafka:
+  topic: ms.client.neg.client.event
+  server: kafka:9092
+  #Producers
+  producer:
+    key: ms-client-neg
+    retries: 3
+    acks: all
+    max:
+      flight:
+        request: 5
+    enable:
+      idempotence: true
+    batch:
+      size: 16384
+    buffer:
+      memory: 33554432
+    linger:
+      ms: 10

@@ -1,0 +1,29 @@
+server:
+  port: 8001
+
+spring:
+  profiles:
+    active: local
+  application:
+    name: ms-client-neg
+
+#Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+      livenessstate:
+        enabled: true
+      readinessstate:
+      enabled: true
+
+#Project info
+app:
+  version: @project.version@
+  name: @project.name@
