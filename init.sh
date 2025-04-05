@@ -1,11 +1,10 @@
 #!/bin/bash
-echo "Start: Sleep 10 seconds"
-sleep 10;
+echo "Start: Sleep 20 seconds"
+sleep 20;
 
 # Creando el topic 'created.transaction'
-echo "Creando el topic  =>> 'ms.spring.template.topic.in'"
-kafka-topics --create --if-not-exists --zookeeper zookeeper:2181 --partitions 5 --replication-factor 1 --topic 'ms.spring.template.topic.in'
-echo "topic 'ms.spring.template.topic.in' creado"
+echo "Creando el topic  =>> 'ms.client.neg.client.event'"
+kafka-topics --create --if-not-exists --zookeeper zookeeper:2181 --partitions 2 --replication-factor 1 --topic 'ms.client.neg.client.event'
 
 
 # Comando de espera infinita para mantener el contenedor en ejecución
