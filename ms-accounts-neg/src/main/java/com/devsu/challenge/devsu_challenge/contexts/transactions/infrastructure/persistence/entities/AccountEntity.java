@@ -22,7 +22,7 @@ public class AccountEntity implements Serializable {
    private String id;
    @Column(name = "number")
    private String number;
-   @Column(name = "number")
+   @Column(name = "type")
    private AccountType type;
    @Column(name = "opening_balance")
    private BigDecimal openingBalance;

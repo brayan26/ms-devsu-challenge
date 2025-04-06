@@ -13,11 +13,11 @@ import java.util.List;
 @Repository
 public interface JpaAccountRepository extends JpaRepository<AccountEntity, String> {
    @Modifying
-   @Query("UPDATE a FROM AccountEntity a SET a.status=false WHERE a.id=:accountId")
+   @Query("UPDATE AccountEntity a SET a.status=false WHERE a.id=:accountId")
    void inactiveAccount(@Param("accountId") String accountId);
 
    @Modifying
-   @Query("UPDATE a FROM AccountEntity a SET a.balance=:balance WHERE a.id=:accountId")
+   @Query("UPDATE AccountEntity a SET a.balance=:balance WHERE a.id=:accountId")
    void updateBalance(@Param("accountId") String accountId, @Param("balance")BigDecimal balance);
 
    @Query("SELECT a FROM AccountEntity a WHERE a.client.clientId=:clientId")
