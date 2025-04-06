@@ -1,10 +1,11 @@
-package com.devsu.challenge.devsu_challenge.contexts.accounts.infrastructure.persistence.entities;
+package com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities;
 
-import com.devsu.challenge.devsu_challenge.contexts.accounts.domain.clazz.MovementType;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.MovementType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -27,7 +28,8 @@ public class MovementEntity implements Serializable {
    private Double value;
    @Column(name = "balance")
    private Double balance;
-   @Column(name = "created_at", updatable = false)
+   @CreationTimestamp
+   @Column(name = "created_at", nullable = false, updatable = false)
    @Temporal(TemporalType.TIMESTAMP)
    private LocalDateTime createdAt;
    @Column(name = "updated_at")

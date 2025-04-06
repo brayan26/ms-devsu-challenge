@@ -1,28 +1,30 @@
-package com.devsu.challenge.devsu_challenge.contexts.accounts.infrastructure.persistence.repositories.impl;
+package com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.repositories.impl;
 
-import com.devsu.challenge.devsu_challenge.contexts.accounts.domain.clazz.Movement;
-import com.devsu.challenge.devsu_challenge.contexts.accounts.domain.repositories.IMovementRepository;
-import com.devsu.challenge.devsu_challenge.contexts.accounts.infrastructure.persistence.repositories.JpaMovementsRepository;
-import com.devsu.challenge.devsu_challenge.contexts.shared.infrastructure.utils.DateUtils;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Movement;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.repositories.IMovementRepository;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.mapper.MovementMapper;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities.AccountEntity;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities.MovementEntity;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.repositories.JpaMovementsRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public class MovementRepositoryImpl implements IMovementRepository {
+   private final MovementMapper mapper;
    private final JpaMovementsRepository repository;
 
-   public MovementRepositoryImpl(JpaMovementsRepository repository) {
+   public MovementRepositoryImpl(MovementMapper mapper, JpaMovementsRepository repository) {
+      this.mapper = mapper;
       this.repository = repository;
    }
 
    @Override
    public Movement create(Movement movement) {
-      movement.setDate(DateUtils.localDateToString(LocalDateTime.now()));
-      movement.setId(null);
-
-      return null;
+      MovementEntity entity = mapper.toEntity(movement);
+      entity.setAccount(new AccountEntity(movement.getAccountId()));
+      return mapper.toDomain(repository.save(entity));
    }
 
    @Override

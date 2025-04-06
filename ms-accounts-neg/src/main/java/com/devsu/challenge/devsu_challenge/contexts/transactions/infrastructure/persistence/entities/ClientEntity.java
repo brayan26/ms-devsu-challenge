@@ -1,4 +1,4 @@
-package com.devsu.challenge.devsu_challenge.contexts.accounts.infrastructure.persistence.entities;
+package com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +19,8 @@ public class ClientEntity implements Serializable {
    private String clientId;
    @Column(name = "name")
    private String name;
+
+   public ClientEntity(String id) {
+      this.clientId = id;
+   }
 }
