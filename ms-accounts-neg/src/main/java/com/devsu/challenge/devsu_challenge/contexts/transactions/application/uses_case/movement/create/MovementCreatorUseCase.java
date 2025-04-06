@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class CreateMovementUseCase {
+public class MovementCreatorUseCase {
    private final IMovementRepository repository;
 
-   public CreateMovementUseCase(IMovementRepository repository) {
+   public MovementCreatorUseCase(IMovementRepository repository) {
       this.repository = repository;
    }
 
