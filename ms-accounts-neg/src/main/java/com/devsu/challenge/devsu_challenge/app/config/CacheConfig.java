@@ -1,4 +1,4 @@
-package com.devsu.challenge.app.config;
+package com.devsu.challenge.devsu_challenge.app.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
@@ -13,10 +13,10 @@ public class CacheConfig {
 
    @Bean
    public CacheManager cacheManager() {
-      CaffeineCacheManager cacheManager = new CaffeineCacheManager("ClientCache");
+      CaffeineCacheManager cacheManager = new CaffeineCacheManager("MovementsCache");
       cacheManager.setCaffeine(Caffeine.newBuilder()
-            .expireAfterWrite(30, TimeUnit.MINUTES)
-            .maximumSize(100));
+            .expireAfterWrite(60, TimeUnit.MINUTES)
+            .maximumSize(1000));
       return cacheManager;
    }
 }

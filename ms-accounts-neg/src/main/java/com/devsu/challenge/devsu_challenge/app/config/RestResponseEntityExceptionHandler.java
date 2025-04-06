@@ -1,7 +1,7 @@
-package com.devsu.challenge.app.config;
+package com.devsu.challenge.devsu_challenge.app.config;
 
-import com.devsu.challenge.contexts.shared.infrastructure.exceptions.GenericBadRequestException;
-import com.devsu.challenge.contexts.shared.infrastructure.exceptions.GenericNotFoundException;
+import com.devsu.challenge.devsu_challenge.contexts.shared.infrastructure.exceptions.GenericBadRequestException;
+import com.devsu.challenge.devsu_challenge.contexts.shared.infrastructure.exceptions.GenericNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

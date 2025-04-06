@@ -1,4 +1,4 @@
-package com.devsu.challenge.app.config.kafka;
+package com.devsu.challenge.devsu_challenge.app.config.kafka;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.prometheusmetrics.PrometheusConfig;
