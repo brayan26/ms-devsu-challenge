@@ -1,6 +1,7 @@
 ms-client-neg/HELP.md
+ms-accounts-neg/HELP.md
 ms-client-neg/target/
-ms-accounts-neg/
+ms-accounts-neg/target
 
 .DS_Store
 !.mvn/wrapper/maven-wrapper.jar
