@@ -30,7 +30,12 @@ public class AccountRepositoryImpl implements IAccountRepository {
    public Account create(Account account) {
       AccountEntity entity = mapper.toEntity(account);
       entity.setClient(new ClientEntity(account.getClientId()));
-      return mapper.toDomain(this.repository.save(entity));
+      //mapper
+      AccountEntity saved = this.repository.save(entity);
+      Account response = mapper.toDomain(saved);
+      response.setClientId(saved.getClient().getClientId());
+      response.setClientName(saved.getClient().getName());
+      return response;
    }
 
    @Override
@@ -53,7 +58,11 @@ public class AccountRepositoryImpl implements IAccountRepository {
                String.format("<AccountRepositoryImpl.findAccountById> Account with id '%s' not found", id),
                AccountError.builder().notFound().build());
       }
-      return mapper.toDomain(optional.get());
+      AccountEntity saved = optional.get();
+      Account response = mapper.toDomain(saved);
+      response.setClientId(saved.getClient().getClientId());
+      response.setClientName(saved.getClient().getName());
+      return response;
    }
 
    @Override
@@ -61,7 +70,12 @@ public class AccountRepositoryImpl implements IAccountRepository {
    public List<Account> findAccountsByClientId(String clientId) {
       return this.repository.findAccountByClientId(clientId)
             .stream()
-            .map(mapper::toDomain)
+            .map(entity -> {
+               Account response = mapper.toDomain(entity);
+               response.setClientId(entity.getClient().getClientId());
+               response.setClientName(entity.getClient().getName());
+               return response;
+            })
             .toList();
    }
 
