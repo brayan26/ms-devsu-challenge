@@ -1,4 +1,4 @@
-package com.devsu.challenge.app.controllers;
+package com.devsu.challenge.devsu_challenge.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
