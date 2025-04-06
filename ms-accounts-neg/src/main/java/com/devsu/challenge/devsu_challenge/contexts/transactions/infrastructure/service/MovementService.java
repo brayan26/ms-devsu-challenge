@@ -3,6 +3,7 @@ package com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure
 import com.devsu.challenge.devsu_challenge.contexts.shared.infrastructure.exceptions.GenericBadRequestException;
 import com.devsu.challenge.devsu_challenge.contexts.shared.infrastructure.utils.DateUtils;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.application.uses_case.movement.create.MovementCreatorUseCase;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.application.uses_case.movement.find.MovementsFinderByAccountIdUseCase;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Account;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Movement;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.MovementType;
@@ -12,12 +13,14 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class MovementService {
    private final AccountService accountService;
    private final MovementCreatorUseCase movementCreatorUseCase;
+   private final MovementsFinderByAccountIdUseCase movementsFinderByAccountIdUseCase;
 
    public Movement registerMovement(Movement movement) {
       // Validamos la cuenta
@@ -50,5 +53,13 @@ public class MovementService {
       // Actualizar el nuevo saldo en la cuenta
       this.accountService.updateBalance(domain.getAccountId(), newBalance);
       return response;
+   }
+
+   public List<Movement> findMovementsByAccountId(String accountId) {
+      return this.movementsFinderByAccountIdUseCase.run(accountId);
+   }
+
+   public List<Movement> findMovementsByDateRangeAndClientId() {
+      return List.of();
    }
 }
