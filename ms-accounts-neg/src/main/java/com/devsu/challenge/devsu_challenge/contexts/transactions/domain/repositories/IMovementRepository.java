@@ -1,6 +1,6 @@
-package com.devsu.challenge.devsu_challenge.contexts.accounts.domain.repositories;
+package com.devsu.challenge.devsu_challenge.contexts.transactions.domain.repositories;
 
-import com.devsu.challenge.devsu_challenge.contexts.accounts.domain.clazz.Movement;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Movement;
 
 import java.util.List;
 
