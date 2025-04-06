@@ -4,6 +4,8 @@ import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Ac
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/account")
 public interface IAccountRestController {
    @PostMapping(path = "/create", produces = {"application/json"})
@@ -12,6 +14,9 @@ public interface IAccountRestController {
    @GetMapping(path = "/get/{id}", produces = {"application/json"})
    ResponseEntity<Account> getById(@PathVariable String id);
 
-   @GetMapping(path = "/inactive/{id}", produces = {"application/json"})
+   @GetMapping(path = "/findAccountsByClientId/{clientId}", produces = {"application/json"})
+   ResponseEntity<List<Account>> findByClientId(@PathVariable String clientId);
+
+   @PatchMapping(path = "/inactive/{id}", produces = {"application/json"})
    ResponseEntity<?> inactive(@PathVariable String id);
 }

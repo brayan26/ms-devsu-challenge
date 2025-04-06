@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("*")
 public class AccountRestController implements IAccountRestController {
@@ -26,6 +28,11 @@ public class AccountRestController implements IAccountRestController {
    @Override
    public ResponseEntity<Account> getById(@PathVariable String id) {
       return ResponseEntity.ok(this.accountService.getAccountById(id));
+   }
+
+   @Override
+   public ResponseEntity<List<Account>> findByClientId(@PathVariable String clientId) {
+      return ResponseEntity.ok(this.accountService.getAccountByAccountId(clientId));
    }
 
    @Override
