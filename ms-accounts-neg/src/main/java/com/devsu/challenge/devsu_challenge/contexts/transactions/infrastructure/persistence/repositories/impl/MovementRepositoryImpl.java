@@ -29,7 +29,10 @@ public class MovementRepositoryImpl implements IMovementRepository {
 
    @Override
    public List<Movement> findMovementsByAccount(String accountId) {
-      return List.of();
+      return this.repository.findMovementsByAccountId(accountId)
+            .stream()
+            .map(mapper::toDomain)
+            .toList();
    }
 
    @Override
