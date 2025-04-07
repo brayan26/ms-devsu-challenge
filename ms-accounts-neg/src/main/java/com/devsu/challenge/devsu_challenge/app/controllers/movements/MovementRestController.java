@@ -1,6 +1,7 @@
 package com.devsu.challenge.devsu_challenge.app.controllers.movements;
 
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Movement;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.MovementByClient;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.service.MovementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,9 @@ public class MovementRestController implements IMovementsRestController {
    }
 
    @Override
-   public ResponseEntity<List<Movement>> report(@RequestParam(name = "startDate") String startDate,
-                                                @RequestParam(name = "endDate") String endDate,
-                                                @RequestParam(name = "clientId") String clientId) {
+   public ResponseEntity<List<MovementByClient>> report(@RequestParam(name = "startDate") String startDate,
+                                                        @RequestParam(name = "endDate") String endDate,
+                                                        @RequestParam(name = "clientId") String clientId) {
       return ResponseEntity.ok(this.service.findMovementsByDateRangeAndClientId(startDate, endDate, clientId));
    }
 }

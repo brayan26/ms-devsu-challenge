@@ -1,6 +1,7 @@
 package com.devsu.challenge.devsu_challenge.app.controllers.movements;
 
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Movement;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.MovementByClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public interface IMovementsRestController {
    ResponseEntity<List<Movement>> findByAccountId(@PathVariable String accountId);
 
    @GetMapping(path = "/report", produces = {"application/json"})
-   ResponseEntity<List<Movement>> report(@RequestParam(name = "startDate") String startDate,
-                                         @RequestParam(name = "endDate") String endDate,
-                                         @RequestParam(name = "clientId") String clientId);
+   ResponseEntity<List<MovementByClient>> report(@RequestParam(name = "startDate") String startDate,
+                                                 @RequestParam(name = "endDate") String endDate,
+                                                 @RequestParam(name = "clientId") String clientId);
 }
