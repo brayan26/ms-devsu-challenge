@@ -10,7 +10,7 @@ COPY ./src /app/src
 
 RUN $MVNW clean package -DskipTests
 
-COPY /*/target/devsu-challenge-client-*.jar ./app.jar
+COPY /*/target/devsu-challenge-accounts-*.jar ./app.jar
 EXPOSE 8001
 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/target/*.jar"]

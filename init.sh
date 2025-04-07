@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Start: Sleep 20 seconds"
-sleep 20;
+sleep 30;
 
 # Creando el topic 'created.transaction'
 echo "Creando el topic  =>> 'ms.client.neg.client.event'"

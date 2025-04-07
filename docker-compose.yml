@@ -62,6 +62,18 @@ services:
       - kafka
     networks:
       - spring_network
+  ms-accounts-neg:
+    build: ./ms-accounts-neg
+    container_name: ms-accounts-neg
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8002:8002"
+    depends_on:
+      - mysql
+      - kafka
+    networks:
+      - spring_network
 volumes:
   mysql_data:
     name: mysql_data

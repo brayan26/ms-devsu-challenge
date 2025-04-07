@@ -25,7 +25,7 @@ public class ClientEntity implements Serializable {
    private String gender;
    @Column(name = "age")
    private int age;
-   @Column(name = "dni")
+   @Column(name = "dni", unique = true)
    private String dni;
    @Column(name = "address_line")
    private String addressLine;
