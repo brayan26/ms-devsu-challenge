@@ -60,6 +60,7 @@ services:
     depends_on:
       - mysql
       - kafka
+      - command_after_start_kafka
     networks:
       - spring_network
   ms-accounts-neg:
@@ -72,6 +73,7 @@ services:
     depends_on:
       - mysql
       - kafka
+      - command_after_start_kafka
     networks:
       - spring_network
 volumes:
