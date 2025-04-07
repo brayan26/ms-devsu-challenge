@@ -13,11 +13,12 @@ import java.math.BigDecimal;
 @Builder
 public class Movement {
    private String id;
-   private String date;
+   private String movementDate;
    private MovementType type;
    private BigDecimal value;
    private BigDecimal balance;
    private String createdAt;
    private String accountId;
+   private String accountNumber;
    private AccountType accountType;
 }
