@@ -1,0 +1,409 @@
+{
+	"info": {
+		"_postman_id": "a0adc038-0c7d-4ccb-b9e0-15d281b12fe5",
+		"name": "devsu-llc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3209488"
+	},
+	"item": [
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "/account/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Set environment variable [new_account_id]\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.globals.set(\"new_account_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\": \"479852\",\n    \"type\": \"AHORRO\",\n    \"openingBalance\": 1000,\n    \"clientId\": \"{{new_client_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8002/account/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"account",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/account/get/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8002/account/get/{{new_account_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"account",
+								"get",
+								"{{new_account_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/findAccountsByClientId/{clientId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8002/account/findAccountsByClientId/{{new_client_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"account",
+								"findAccountsByClientId",
+								"{{new_client_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/account/inactive/{id}",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8002/account/inactive/{{new_account_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"account",
+								"inactive",
+								"{{new_account_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cliente",
+			"item": [
+				{
+					"name": "/client/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Set environment variable [new_client_id]\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.globals.set(\"new_client_id\", jsonData.clienteId);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Brayan Parra\",\n    \"age\": 28,\n    \"password\": \"1234\",\n    \"status\": true,\n    \"gender\": \"MALE\",\n    \"dni\": \"1246274111\",\n    \"addressLine\": \"CL 1D 21 40, Palmar de la cienaga\",\n    \"phone\": \"3007611414\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/client/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"client",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/client/get/{clientId}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/client/get/{{new_client_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"client",
+								"get",
+								"{{new_client_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/client/findAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/client/findAll",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"client",
+								"findAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/client/update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Carlos Sarmiento Parra\",\n    \"age\": 28,\n    \"password\": \"123\",\n    \"status\": true,\n    \"gender\": \"MALE\",\n    \"dni\": \"1246274111\",\n    \"addressLine\": \"CL 1D 21 40, Palmar de la cienaga\",\n    \"phone\": \"3007611414\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/client/update/{{new_client_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"client",
+								"update",
+								"{{new_client_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/client/delete/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/client/delete/{{new_client_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"client",
+								"delete",
+								"{{new_client_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movement",
+			"item": [
+				{
+					"name": "/movment/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Set environment variable [new_movement_id]\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.globals.set(\"new_movement_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"DEBIT\",\n    \"value\": 80.00,\n    \"accountId\": \"{{new_account_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8002/movements/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"movements",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movements/findByAccountId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8002/movements/findByAccountId/{{new_account_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"movements",
+								"findByAccountId",
+								"{{new_account_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movements/report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8002/movements/report?startDate=2025-04-07&endDate=2025-04-07&clientId=1246274111",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"movements",
+								"report"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-04-07"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-04-07"
+								},
+								{
+									"key": "clientId",
+									"value": "1246274111"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
