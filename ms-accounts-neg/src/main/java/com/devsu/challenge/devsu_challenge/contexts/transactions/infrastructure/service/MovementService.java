@@ -29,7 +29,7 @@ public class MovementService {
       // Si el valor de transacción es positivo aún cuando el movimiento es un retiro, lo convertimos a negativo
       if (MovementType.DEBIT.equals(movement.getType())
             && movement.getValue().compareTo(BigDecimal.ZERO) > 0) {
-         movement.setValue(movement.getValue().multiply(BigDecimal.valueOf(-1)));
+         movement.setValue(movement.getValue().negate());
       }
 
       // validamos el nuevo saldo
@@ -42,7 +42,7 @@ public class MovementService {
 
       // Guardamos el movimiento
       Movement domain = Movement.builder()
-            .date(DateUtils.localDateToString(LocalDateTime.now()))
+            .movementDate(DateUtils.localDateToString(LocalDateTime.now()))
             .type(movement.getType())
             .value(movement.getValue())
             .balance(newBalance)
@@ -59,7 +59,7 @@ public class MovementService {
       return this.movementsFinderByAccountIdUseCase.run(accountId);
    }
 
-   public List<Movement> findMovementsByDateRangeAndClientId() {
+   public List<Movement> findMovementsByDateRangeAndClientId(String startDate, String endDate, String clientId) {
       return List.of();
    }
 }
