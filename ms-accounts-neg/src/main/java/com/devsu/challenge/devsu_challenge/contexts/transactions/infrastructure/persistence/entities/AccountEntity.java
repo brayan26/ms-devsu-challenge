@@ -20,9 +20,10 @@ public class AccountEntity implements Serializable {
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
    private String id;
-   @Column(name = "number")
+   @Column(name = "number", unique = true)
    private String number;
    @Column(name = "type")
+   @Enumerated(EnumType.STRING)
    private AccountType type;
    @Column(name = "opening_balance")
    private BigDecimal openingBalance;

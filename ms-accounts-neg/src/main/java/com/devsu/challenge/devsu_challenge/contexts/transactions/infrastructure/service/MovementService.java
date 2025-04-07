@@ -4,8 +4,10 @@ import com.devsu.challenge.devsu_challenge.contexts.shared.infrastructure.except
 import com.devsu.challenge.devsu_challenge.contexts.shared.infrastructure.utils.DateUtils;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.application.uses_case.movement.create.MovementCreatorUseCase;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.application.uses_case.movement.find.MovementsFinderByAccountIdUseCase;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.application.uses_case.movement.find.MovementsReportUseCase;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Account;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.Movement;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.MovementByClient;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.clazz.MovementType;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.domain.error.TransactionError;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class MovementService {
    private final AccountService accountService;
    private final MovementCreatorUseCase movementCreatorUseCase;
    private final MovementsFinderByAccountIdUseCase movementsFinderByAccountIdUseCase;
+   private final MovementsReportUseCase movementsReportUseCase;
 
    public Movement registerMovement(Movement movement) {
       // Validamos la cuenta
@@ -34,6 +37,10 @@ public class MovementService {
 
       // validamos el nuevo saldo
       BigDecimal previousBalance = account.getBalance();
+      if (previousBalance.compareTo(BigDecimal.ZERO) == 0) {
+         previousBalance = account.getOpeningBalance();
+      }
+
       BigDecimal newBalance = previousBalance.add(movement.getValue());
       if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
          throw new GenericBadRequestException("<MovementService.registerMovement> insufficient balance",
@@ -59,7 +66,7 @@ public class MovementService {
       return this.movementsFinderByAccountIdUseCase.run(accountId);
    }
 
-   public List<Movement> findMovementsByDateRangeAndClientId(String startDate, String endDate, String clientId) {
-      return List.of();
+   public List<MovementByClient> findMovementsByDateRangeAndClientId(String startDate, String endDate, String clientId) {
+      return this.movementsReportUseCase.run(startDate, endDate, clientId);
    }
 }
