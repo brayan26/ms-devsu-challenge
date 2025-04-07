@@ -19,8 +19,8 @@ public class MovementEntity implements Serializable {
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
    private String id;
-   @Column(name = "date")
-   private String date;
+   @Column(name = "date_movement")
+   private String movementDate;
    @Column(name = "type")
    @Enumerated(EnumType.STRING)
    private MovementType type;

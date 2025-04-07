@@ -8,6 +8,7 @@ import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.
 import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities.AccountEntity;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities.ClientEntity;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.repositories.JpaAccountRepository;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.utils.AccountTransformUtil;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +47,8 @@ public class AccountRepositoryImpl implements IAccountRepository {
             AccountError.builder().notFound().build()));
       mapper.merge(account, entity);
       entity.setClient(new ClientEntity(account.getClientId()));
-      return mapper.toDomain(this.repository.save(entity));
+      AccountEntity saved = this.repository.save(entity);
+      return AccountTransformUtil.transform(mapper.toDomain(saved), saved);
    }
 
    @Override
@@ -58,11 +60,7 @@ public class AccountRepositoryImpl implements IAccountRepository {
                String.format("<AccountRepositoryImpl.findAccountById> Account with id '%s' not found", id),
                AccountError.builder().notFound().build());
       }
-      AccountEntity saved = optional.get();
-      Account response = mapper.toDomain(saved);
-      response.setClientId(saved.getClient().getClientId());
-      response.setClientName(saved.getClient().getName());
-      return response;
+      return AccountTransformUtil.transform(mapper.toDomain(optional.get()), optional.get());
    }
 
    @Override
@@ -70,12 +68,7 @@ public class AccountRepositoryImpl implements IAccountRepository {
    public List<Account> findAccountsByClientId(String clientId) {
       return this.repository.findAccountByClientId(clientId)
             .stream()
-            .map(entity -> {
-               Account response = mapper.toDomain(entity);
-               response.setClientId(entity.getClient().getClientId());
-               response.setClientName(entity.getClient().getName());
-               return response;
-            })
+            .map(entity -> AccountTransformUtil.transform(mapper.toDomain(entity), entity))
             .toList();
    }
 

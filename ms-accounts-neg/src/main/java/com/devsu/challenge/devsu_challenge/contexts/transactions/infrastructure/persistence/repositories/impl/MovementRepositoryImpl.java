@@ -6,6 +6,7 @@ import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.
 import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities.AccountEntity;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.entities.MovementEntity;
 import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.persistence.repositories.JpaMovementsRepository;
+import com.devsu.challenge.devsu_challenge.contexts.transactions.infrastructure.utils.MovementTransformUtil;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,14 +25,15 @@ public class MovementRepositoryImpl implements IMovementRepository {
    public Movement create(Movement movement) {
       MovementEntity entity = mapper.toEntity(movement);
       entity.setAccount(new AccountEntity(movement.getAccountId()));
-      return mapper.toDomain(repository.save(entity));
+      MovementEntity saved = repository.save(entity);
+      return MovementTransformUtil.transform(mapper.toDomain(saved), saved);
    }
 
    @Override
    public List<Movement> findMovementsByAccount(String accountId) {
       return this.repository.findMovementsByAccountId(accountId)
             .stream()
-            .map(mapper::toDomain)
+            .map(entity -> MovementTransformUtil.transform(mapper.toDomain(entity), entity))
             .toList();
    }
 

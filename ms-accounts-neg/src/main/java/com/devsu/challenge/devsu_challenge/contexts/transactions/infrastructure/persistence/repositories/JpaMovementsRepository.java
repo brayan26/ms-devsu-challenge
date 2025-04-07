@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface JpaMovementsRepository extends JpaRepository<MovementEntity, String> {
-   @Query("SELECT m FROM MovementEntity m WHERE m.account.id=:accountId ORDER BY m.date DESC")
+   @Query("SELECT m FROM MovementEntity m WHERE m.account.id=:accountId ORDER BY m.createdAt DESC")
    List<MovementEntity> findMovementsByAccountId(@Param("accountId") String accountId);
 }
